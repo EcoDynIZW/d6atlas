@@ -20,4 +20,5 @@ Imports:
     colorspace,
     scales,
     grDevices,
-    ggspatial
+    ggspatial,
+    usethis

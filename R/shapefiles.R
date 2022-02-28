@@ -1,21 +1,4 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
 
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[sf]{st_read}}
-#' @rdname shapefiles
-#' @export
-#' @importFrom sf read_sf
-
-shapefiles<-function(){
 
 water_01 <- sf::read_sf("data-raw/01_water_line.shp")
 water_01 <- water_01[,c(1,7,8,21,22)]
@@ -50,7 +33,18 @@ garden_graveyard_10 <- garden_graveyard_10[,c(1,7,8,21,22)]
 
 built_up_12 <- sf::read_sf("data-raw/12_built.shp")
 built_up_12 <- built_up_12[,c(1,7,8,21,22)]
-}
 
 
+
+usethis::use_data(water_01,
+                  water_02,
+                  ruderal_03,
+                  swamp_04,
+                  grassland_05,
+                  bushland_07,
+                  forest_08,
+                  agriculture_09,
+                  garden_graveyard_10,
+                  built_up_12,
+                  overwrite = T)
 
