@@ -2,10 +2,13 @@
 % Please edit documentation in R/atlasplot.R
 \name{atlasplot}
 \alias{atlasplot}
-\title{FUNCTION_TITLE}
+\title{Plot template map Uckermark}
 \usage{
 atlasplot(
   color_intensity = 1,
+  scalebar = FALSE,
+  north_arrow = FALSE,
+  caption = TRUE,
   legend = "bottom",
   legend_x = NULL,
   legend_y = NULL,
@@ -13,31 +16,33 @@ atlasplot(
 )
 }
 \arguments{
-\item{color_intensity}{PARAM_DESCRIPTION, Default: 1}
+\item{color_intensity}{Numeric: control the desaturation of
+the color intensity, ranging from 0 (fully
+desaturated) to 1 (fully saturated), Default: 1}
 
-\item{legend}{PARAM_DESCRIPTION, Default: 'bottom'}
+\item{scalebar}{Boolean: add a scale bar, Default: FALSE}
 
-\item{legend_x}{PARAM_DESCRIPTION, Default: NULL}
+\item{north_arrow}{Boolean: add a north arrow, Default: FALSE}
 
-\item{legend_y}{PARAM_DESCRIPTION, Default: NULL}
+\item{caption}{Boolean: add a caption, Default: TRUE}
 
-\item{print}{PARAM_DESCRIPTION, Default: FALSE}
+\item{legend}{string: Either "bottom", "top", or "none". Otherwise specify
+positions via legend_x and legend_y, Default: 'bottom'}
+
+\item{legend_x}{Numeric: Horizontal position of the legend (0–1), Default: NULL}
+
+\item{legend_y}{Numeric: Vertical position of the legend (0–1), Default: NULL}
+
+\item{print}{Boolean: print the map in the viewer pane, Default: FALSE}
 }
 \value{
-OUTPUT_DESCRIPTION
+A ggplot object containing a template map for the ATLAS-region
 }
 \description{
-FUNCTION_DESCRIPTION
+plots a template map
 }
 \details{
 DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
 }
 \seealso{
 \code{\link[dplyr]{between}}

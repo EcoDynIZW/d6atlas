@@ -1,16 +1,22 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param color_intensity PARAM_DESCRIPTION, Default: 1
-#' @param legend PARAM_DESCRIPTION, Default: 'bottom'
-#' @param legend_x PARAM_DESCRIPTION, Default: NULL
-#' @param legend_y PARAM_DESCRIPTION, Default: NULL
-#' @param print PARAM_DESCRIPTION, Default: FALSE
-#' @return OUTPUT_DESCRIPTION
+#' @title Plot template map Uckermark
+#' @description plots a template map
+#' @param color_intensity Numeric: control the desaturation of
+#'                        the color intensity, ranging from 0 (fully
+#'                        desaturated) to 1 (fully saturated), Default: 1
+#' @param scalebar Boolean: add a scale bar, Default: FALSE
+#' @param north_arrow Boolean: add a north arrow, Default: FALSE
+#' @param insert_caption Boolean: add a caption, Default: TRUE
+#' @param legend string: Either "bottom", "top", or "none". Otherwise specify
+#'               positions via legend_x and legend_y, Default: 'bottom'
+#' @param legend_x Numeric: Horizontal position of the legend (0–1), Default: NULL
+#' @param legend_y Numeric: Vertical position of the legend (0–1), Default: NULL
+#' @param print Boolean: print the map in the viewer pane, Default: FALSE
+#' @return A ggplot object containing a template map for the ATLAS-region
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
+#' atlasplot()
+#' atlasplot(north_arrow = TRUE, scalebar = TRUE)
 #'  }
 #' }
 #' @seealso
@@ -25,9 +31,13 @@
 #' @importFrom scales alpha
 #' @importFrom grDevices colorRampPalette
 #' @importFrom colorspace desaturate lighten
-#' @importFrom ggplot2 ggplot geom_sf theme_void
-
+#' @importFrom ggplot2 ggplot geom_sf theme_void element_blank element_rect annotate
+#' @importFrom ggspatial annotation_scale annotation_north_arrow
+#'
 atlasplot <- function(color_intensity = 1,
+                      scalebar = FALSE,
+                      north_arrow = FALSE,
+                      insert_caption = TRUE,
                       legend = "bottom",
                       legend_x = NULL,
                       legend_y = NULL,
@@ -133,6 +143,44 @@ atlasplot <- function(color_intensity = 1,
                      fill = "#948f8d",
                      color = "#948f8d",
                      lwd = 0.05)+
-    ggplot2::theme_void()
- print(g)
+    ## theme....................................................................
+                      ggplot2::theme(
+                        panel.grid.major  = ggplot2::element_blank(),
+                        panel.background = ggplot2::element_rect(fill="white"),
+                        axis.title = ggplot2::element_blank()
+                      )
+
+    ## annotation scale.........................................................
+  if (scalebar == TRUE) {
+    message("Adding annotation scalebar.")
+
+  g<-g+ggspatial::annotation_scale(
+      location=c("bl"),
+      height = ggplot2::unit(0.4, "cm"),
+      line_width = 1.3, width_hint = .36,
+      text_col = "black", text_cex = 1, #text_family = font_family,
+      pad_x = ggplot2::unit(1.2, "cm"), pad_y = ggplot2::unit(1.3, "cm")
+  )}
+  ## north arrow................................................................
+  if (north_arrow == TRUE) {
+    message("Adding north scale.")
+
+    g<-g+ggspatial::annotation_north_arrow(
+      location = "br", which_north = "true",
+      height = ggplot2::unit(1.5, "cm"),
+      width = ggplot2::unit(1.0, "cm"),
+      pad_x = ggplot2::unit(1.3, "cm"), pad_y = ggplot2::unit(1.1, "cm"))
+  }
+    ## annotation...............................................................
+    if (insert_caption == TRUE) {
+      message("Adding caption.")
+
+    g<-g+ggplot2::annotate("text", x = 414300 , y = 5911568, label = caption,
+                      hjust = 0, vjust = 1, color = "grey30",
+                      #family = font_family,
+                      size = 3.4, lineheight = .95)
+  }
+
+ return(g)
 }
+
