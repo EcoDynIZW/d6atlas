@@ -113,7 +113,7 @@ atlasauto() is based on atlasplot(), but takes the functionality one step furthe
 Let's consider you just received your data and want to have a quick look, how your animals move in the landscape:
 
 ```{r}
-data("starling_2547") #this data set comes with the package
+starling_2547<-d6atlasplot::starling_2547 #this data set comes with the package
 
 # here, the crs is transformed to match the one of the underlying map, the data frame is transformed into a simple features object, the bounding box is extracted to plot a smaller window of interest.
 atlasauto(starling_2547) 
