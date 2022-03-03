@@ -165,7 +165,9 @@ starling_sub <- starling_2547[400:405,]
 
 atlasauto(starling_sub, 
           scalebar = T,
-          color_intensity = 0.8) 
+          color_intensity = 0.8,
+          size = 3,
+          col = "blue") 
 #> Plotting map.
 #> Adding caption.
 #> Adding annotation scalebar.
