@@ -44,6 +44,7 @@ built_up_12 <- sf::read_sf("data-raw/12_built.shp")
 built_up_12 <- built_up_12[,c(1,7,8,21,22)]%>%
   sf::st_transform(25833)
 
+starling_2547 <- readr::read_csv("data-raw/starling_2547")
 
 
 usethis::use_data(water_01,
@@ -56,5 +57,6 @@ usethis::use_data(water_01,
                   agriculture_09,
                   garden_graveyard_10,
                   built_up_12,
+                  starling_2547,
                   overwrite = T)
 

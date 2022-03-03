@@ -1,5 +1,5 @@
 Package: d6atlasplot
-Title: Template maps for visulaizing ecological studies in the BioMove experimental area
+Title: Template maps for visualizing ecological studies in the BioMove experimental area
 Version: 0.0.0.9000
 Authors@R: 
     person("Marius", "Grabow", , "grabow@izw-berlin.de", role = c("aut", "cre"),
@@ -21,4 +21,5 @@ Imports:
     scales,
     grDevices,
     ggspatial,
-    usethis
+    usethis,
+    readr

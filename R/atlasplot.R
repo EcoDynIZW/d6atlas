@@ -1,5 +1,5 @@
-#' @title Plot template map Uckermark
-#' @description plots a template map
+#' @title Plot template map Uckermark (ATLAS experimental area)
+#' @description plots a template map for the experimental area of the ATLAS system in the Uckermark, Brandenburg
 #' @param color_intensity Numeric: control the desaturation of
 #'                        the color intensity, ranging from 0 (fully
 #'                        desaturated) to 1 (fully saturated), Default: 1
@@ -8,11 +8,10 @@
 #' @param insert_caption Boolean: add a caption, Default: TRUE
 #' @param legend string: Either "bottom", "top", or "none". Otherwise specify
 #'               positions via legend_x and legend_y, Default: 'bottom'
-#' @param legend_x Numeric: Horizontal position of the legend (0–1), Default: NULL
-#' @param legend_y Numeric: Vertical position of the legend (0–1), Default: NULL
+#' @param legend_x Numeric: Horizontal position of the legend (0 – 1), Default: NULL
+#' @param legend_y Numeric: Vertical position of the legend (0 – 1), Default: NULL
 #' @param print Boolean: print the map in the viewer pane, Default: FALSE
 #' @return A ggplot object containing a template map for the ATLAS-region
-#' @details DETAILS
 #' @examples
 #' \dontrun{
 #' atlasplot()
@@ -85,7 +84,7 @@ atlasplot <- function(color_intensity = 1,
     )
 
   ## CAPTION TEXT --------------------------------------------------------------
-  caption <- "Data  Map: Landesamt fuer Umwelt Brandenburg (LfU)"
+  caption <- "\nData  Map: Landesamt fuer Umwelt Brandenburg (LfU)"
 
   ## ATLAS MAP ----------------------------------------------------------------
   message("Plotting map.")
@@ -98,16 +97,6 @@ atlasplot <- function(color_intensity = 1,
                      color = col_agriculture,
                      lwd = 0.05,
                      alpha=1)+
-    ## water_01 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::water_01,
-                     fill = col_water,
-                     color = col_water,
-                     lwd = 0.05)+
-    ## water_02 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::water_02,
-                     fill = col_water,
-                     color = col_water,
-                     lwd = 0.05)+
     ## ruderal_03 .............................................................
     ggplot2::geom_sf(data = d6atlasplot::ruderal_03,
                      fill = col_ruderal,
@@ -143,11 +132,23 @@ atlasplot <- function(color_intensity = 1,
                      fill = "#948f8d",
                      color = "#948f8d",
                      lwd = 0.05)+
+    ## water_01 .............................................................
+    ggplot2::geom_sf(data = d6atlasplot::water_01,
+                     fill = col_water,
+                     color = col_water,
+                     lwd = 0.05)+
+    ## water_02 .............................................................
+    ggplot2::geom_sf(data = d6atlasplot::water_02,
+                     fill = col_water,
+                     color = col_water,
+                     lwd = 0.05)+
     ## theme....................................................................
                       ggplot2::theme(
                         panel.grid.major  = ggplot2::element_blank(),
                         panel.background = ggplot2::element_rect(fill="white"),
-                        axis.title = ggplot2::element_blank()
+                        axis.title.y  = ggplot2::element_blank(),
+                        axis.title.x = ggplot2::element_text(colour = "grey20",
+                                                             hjust = 0)
                       )
 
     ## annotation scale.........................................................
@@ -159,7 +160,7 @@ atlasplot <- function(color_intensity = 1,
       height = ggplot2::unit(0.4, "cm"),
       line_width = 1.3, width_hint = .36,
       text_col = "black", text_cex = 1, #text_family = font_family,
-      pad_x = ggplot2::unit(1.2, "cm"), pad_y = ggplot2::unit(1.3, "cm")
+      pad_x = ggplot2::unit(0.8, "cm"), pad_y = ggplot2::unit(0.8, "cm")
   )}
   ## north arrow................................................................
   if (north_arrow == TRUE) {
@@ -169,18 +170,20 @@ atlasplot <- function(color_intensity = 1,
       location = "br", which_north = "true",
       height = ggplot2::unit(1.5, "cm"),
       width = ggplot2::unit(1.0, "cm"),
-      pad_x = ggplot2::unit(1.3, "cm"), pad_y = ggplot2::unit(1.1, "cm"))
+      pad_x = ggplot2::unit(0.8, "cm"), pad_y = ggplot2::unit(0.8, "cm"))
   }
     ## annotation...............................................................
     if (insert_caption == TRUE) {
       message("Adding caption.")
 
-    g<-g+ggplot2::annotate("text", x = 414300 , y = 5911568, label = caption,
-                      hjust = 0, vjust = 1, color = "grey30",
-                      #family = font_family,
-                      size = 3.4, lineheight = .95)
+    # g<-g+ggplot2::annotate("text", x = 414300 , y = 5911568, label = caption,
+    #                   hjust = 0, vjust = 1, color = "grey30",
+    #                   #family = font_family,
+    #                   size = 3.4, lineheight = .95)
+      g<-g+ggplot2::xlab(caption)
   }
 
  return(g)
 }
+
 

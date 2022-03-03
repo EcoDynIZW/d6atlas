@@ -136,3 +136,47 @@
 #'}
 #' @details https://metaver.de/trefferanzeige?docuuid=B57B9F35-AFFF-49F2-BA32-618D1A1CD412
 "built_up_12"
+
+#' @title Starling tracked 2021
+#' @description This data set contains information about one starlign tracked one day in 2021
+#' @format A data frame with 1729 rows and 36 variables:
+#' \describe{
+#'   \item{\code{...1}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{...2}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{TAG}}{double Tag-ID}
+#'   \item{\code{TX}}{double TAG-Nr by ATLAS}
+#'   \item{\code{TIME}}{double TIME}
+#'   \item{\code{X}}{double x ccordinates}
+#'   \item{\code{Y}}{double y coordinates}
+#'   \item{\code{Z}}{double z coordinates}
+#'   \item{\code{FREQ}}{double frequency in seconds}
+#'   \item{\code{DIM}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{NBS}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{NCONSTRAINTS}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{PENALTY}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{GRADNRM}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{VARX}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{VARY}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{VARZ}}{logical COLUMN_DESCRIPTION}
+#'   \item{\code{COVXY}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{COVXZ}}{logical COLUMN_DESCRIPTION}
+#'   \item{\code{COVYZ}}{logical COLUMN_DESCRIPTION}
+#'   \item{\code{hms}}{character COLUMN_DESCRIPTION}
+#'   \item{\code{tagtime}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{date}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{Long}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{Lat}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{X3857}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{Y3857}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{sunlight_time$interval}}{character COLUMN_DESCRIPTION}
+#'   \item{\code{difftime}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{trip_id}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{frequency}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{numtime}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{timetonext}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{timediff}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{test}}{double COLUMN_DESCRIPTION}
+#'   \item{\code{pkey}}{double COLUMN_DESCRIPTION}
+#'}
+#' @details DETAILS
+"starling_2547"

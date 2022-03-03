@@ -2,13 +2,13 @@
 % Please edit documentation in R/atlasplot.R
 \name{atlasplot}
 \alias{atlasplot}
-\title{Plot template map Uckermark}
+\title{Plot template map Uckermark (ATLAS experimental area)}
 \usage{
 atlasplot(
   color_intensity = 1,
   scalebar = FALSE,
   north_arrow = FALSE,
-  caption = TRUE,
+  insert_caption = TRUE,
   legend = "bottom",
   legend_x = NULL,
   legend_y = NULL,
@@ -24,14 +24,14 @@ desaturated) to 1 (fully saturated), Default: 1}
 
 \item{north_arrow}{Boolean: add a north arrow, Default: FALSE}
 
-\item{caption}{Boolean: add a caption, Default: TRUE}
+\item{insert_caption}{Boolean: add a caption, Default: TRUE}
 
 \item{legend}{string: Either "bottom", "top", or "none". Otherwise specify
 positions via legend_x and legend_y, Default: 'bottom'}
 
-\item{legend_x}{Numeric: Horizontal position of the legend (0–1), Default: NULL}
+\item{legend_x}{Numeric: Horizontal position of the legend (0 – 1), Default: NULL}
 
-\item{legend_y}{Numeric: Vertical position of the legend (0–1), Default: NULL}
+\item{legend_y}{Numeric: Vertical position of the legend (0 – 1), Default: NULL}
 
 \item{print}{Boolean: print the map in the viewer pane, Default: FALSE}
 }
@@ -39,10 +39,7 @@ positions via legend_x and legend_y, Default: 'bottom'}
 A ggplot object containing a template map for the ATLAS-region
 }
 \description{
-plots a template map
-}
-\details{
-DETAILS
+plots a template map for the experimental area of the ATLAS system in the Uckermark, Brandenburg
 }
 \seealso{
 \code{\link[dplyr]{between}}
