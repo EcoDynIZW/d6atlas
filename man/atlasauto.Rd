@@ -4,7 +4,14 @@
 \alias{atlasauto}
 \title{Transform your data & plot with suitable bounding box}
 \usage{
-atlasauto(data, size = 1, color = "red", scalebar = FALSE, north_arrow = FALSE)
+atlasauto(
+  data,
+  size = 1,
+  color = "red",
+  scalebar = FALSE,
+  north_arrow = FALSE,
+  color_intensity = 1
+)
 }
 \arguments{
 \item{data}{your data frame, can be filtered or unfiltered}
@@ -16,6 +23,10 @@ atlasauto(data, size = 1, color = "red", scalebar = FALSE, north_arrow = FALSE)
 \item{scalebar}{Boolean: add a scale bar, Default: FALSE}
 
 \item{north_arrow}{Boolean: add a north arrow, Default: FALSE}
+
+\item{color_intensity}{Numeric: control the desaturation of
+the color intensity, ranging from 0 (fully
+desaturated) to 1 (fully saturated), Default: 1}
 }
 \value{
 a ggplot object with the bounding box of your data

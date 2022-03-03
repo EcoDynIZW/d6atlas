@@ -163,7 +163,9 @@ interest.
 ``` r
 starling_sub <- starling_2547[400:405,]
 
-atlasauto(starling_sub, scalebar = T) 
+atlasauto(starling_sub, 
+          scalebar = T,
+          color_intensity = 0.8) 
 #> Plotting map.
 #> Adding caption.
 #> Adding annotation scalebar.

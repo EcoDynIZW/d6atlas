@@ -5,6 +5,9 @@
 #' @param color color of the dots, Default: "red"
 #' @param scalebar Boolean: add a scale bar, Default: FALSE
 #' @param north_arrow Boolean: add a north arrow, Default: FALSE
+#' @param color_intensity Numeric: control the desaturation of
+#'                        the color intensity, ranging from 0 (fully
+#'                        desaturated) to 1 (fully saturated), Default: 1
 #' @return a ggplot object with the bounding box of your data
 #' @examples
 #' \dontrun{
@@ -25,14 +28,15 @@ atlasauto <- function(data,
                       size=1,
                       color="red",
                       scalebar=FALSE,
-                      north_arrow=FALSE){
+                      north_arrow=FALSE,
+                      color_intensity=1){
 
   #transform crs
   data <- sf::st_as_sf(data,coords = c("X","Y"), crs = 32633)
   data <- sf::st_transform(data,crs = 25833)
   bbox <- sf::st_bbox(data)
   #plot
- g <- atlasplot()+
+ g <- atlasplot(color_intensity=color_intensity)+
    ggplot2::geom_sf(data=data,color=color,size=size)+
    ggplot2::coord_sf(xlim = c(bbox[1],bbox[3]),
                      ylim = c(bbox[2],bbox[4]))
