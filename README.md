@@ -62,7 +62,7 @@ You can customize the arguments, e.g. change the color intensity, add a
 scalebar, add a north arrow or remove the caption:
 
 ``` r
-atlasplot(color_intensity = 0.5,
+atlasplot(color_intensity = 1,
           scalebar = TRUE,
           north_arrow = TRUE,
           insert_caption = TRUE)
