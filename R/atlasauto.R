@@ -29,7 +29,7 @@ atlasauto <- function(data,
                       color="red",
                       scalebar=FALSE,
                       north_arrow=FALSE,
-                      color_intensity=1){
+                      color_intensity=1) {
 
   #transform crs
   data <- sf::st_as_sf(data,coords = c("X","Y"), crs = 32633)
@@ -37,7 +37,7 @@ atlasauto <- function(data,
   bbox <- sf::st_bbox(data)
   #plot
  g <- atlasplot(color_intensity=color_intensity)+
-   ggplot2::geom_sf(data=data,color=color,size=size)+
+   ggplot2::geom_sf(data = data, color = color, size = size)+
    ggplot2::coord_sf(xlim = c(bbox[1],bbox[3]),
                      ylim = c(bbox[2],bbox[4]))
  ## annotation scale.........................................................
@@ -61,8 +61,9 @@ atlasauto <- function(data,
      width = ggplot2::unit(1.0, "cm"),
      pad_x = ggplot2::unit(0.8, "cm"), pad_y = ggplot2::unit(0.8, "cm"))
  }
+
 return(g)
 
-}
+ }
 
 
