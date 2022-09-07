@@ -14,8 +14,8 @@
 #' @return A ggplot object containing a template map for the ATLAS-region
 #' @examples
 #' \dontrun{
-#' atlasplot()
-#' atlasplot(north_arrow = TRUE, scalebar = TRUE)
+#' d6atlas::atlasplot()
+#' d6atlas::atlasplot(north_arrow = TRUE, scalebar = TRUE)
 #'  }
 #' }
 #' @seealso
@@ -92,53 +92,53 @@ atlasplot <- function(color_intensity = 1,
 
   g <- ggplot2::ggplot() +
     ## agriculture_09 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::agriculture_09,
+    ggplot2::geom_sf(data = d6atlas::agriculture_09,
                      fill = col_agriculture,
                      color = col_agriculture,
                      lwd = 0.05,
                      alpha=1)+
     ## ruderal_03 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::ruderal_03,
+    ggplot2::geom_sf(data = d6atlas::ruderal_03,
                      fill = col_ruderal,
                      color = col_ruderal,
                      lwd = 0.05)+
     ## swamp_04 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::swamp_04,
+    ggplot2::geom_sf(data = d6atlas::swamp_04,
                      fill = col_ruderal,
                      color = col_ruderal,
                      lwd = 0.05)+
     ## grassland_05 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::grassland_05,
+    ggplot2::geom_sf(data = d6atlas::grassland_05,
                      fill = col_grassland,
                      color = col_grassland,
                      lwd = 0.05)+
     ## bushland_07 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::bushland_07,
+    ggplot2::geom_sf(data = d6atlas::bushland_07,
                      fill = col_forest,
                      color = col_forest,
                      lwd = 0.05)+
     ## forest_08 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::forest_08,
+    ggplot2::geom_sf(data = d6atlas::forest_08,
                      fill = col_forest,
                      color = col_forest,
                      lwd = 0.05)+
     ## garden_graveyard_10 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::garden_graveyard_10,
+    ggplot2::geom_sf(data = d6atlas::garden_graveyard_10,
                      fill = col_grassland,
                      color = col_grassland,
                      lwd = 0.05)+
     ## built_up_12 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::built_up_12,
+    ggplot2::geom_sf(data = d6atlas::built_up_12,
                      fill = "#948f8d",
                      color = "#948f8d",
                      lwd = 0.05)+
     ## water_01 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::water_01,
+    ggplot2::geom_sf(data = d6atlas::water_01,
                      fill = col_water,
                      color = col_water,
                      lwd = 0.05)+
     ## water_02 .............................................................
-    ggplot2::geom_sf(data = d6atlasplot::water_02,
+    ggplot2::geom_sf(data = d6atlas::water_02,
                      fill = col_water,
                      color = col_water,
                      lwd = 0.05)+

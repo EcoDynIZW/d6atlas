@@ -13,23 +13,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-# d6atlasplot + atlasauto
+# d6atlas + atlasauto
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of d6atlasplot is to provide a fast and friendly way to plot data in the ATLAS experimental area in the Uckermark, Brandenburg. It is designed to either plot the whole area covered by the ATLAS system with options to plot your own data, or provide you with an easy tool to transform your data and plot it on a cropped map, without struggling with coordinate systems, shapefiles or other...
+The goal of d6atlas is to provide a fast and friendly way to plot data in the ATLAS experimental area in the Uckermark, Brandenburg. It is designed to either plot the whole area covered by the ATLAS system with options to plot your own data, or provide you with an easy tool to transform your data and plot it on a cropped map, without struggling with coordinate systems, shapefiles or other...
 
 The maps are solely based on the current biotop maps of Brandenburg, provided by the Landesamt fuer Umwelt Brandenburg (LfU) in 2009. These were further aggregated into the main categories. For further information and a PDF about biotop classes visit <https://metaver.de/trefferanzeige?docuuid=B57B9F35-AFFF-49F2-BA32-618D1A1CD412#detail_links>
 
 ## Installation
 
-You can install the development version of d6atlasplot from [GitHub](https://github.com/) with:
+You can install the development version of d6atlas from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mariusgrabow/d6atlasplot")
+devtools::install_github("mariusgrabow/d6atlas")
 ```
 
 (Note: If you are asked if you want to update other packages either press "No" (option 3) and continue or update the packages before running the install command again.)
@@ -38,7 +38,7 @@ Afterwards, load the functionality and data of the package in each session:
 
 
 ```{r}
-library(d6atlasplot)
+library(d6atlas)
 ```
 
 
@@ -69,17 +69,12 @@ Here, we transform our data (starling_2547; a data set that is included in this 
 ```{r}
 library(ggplot2)
 library(sf)
-
-
-starling_2547 <- d6atlasplot::starling_2547 %>%
+starling_2547 <- d6atlas::starling_2547 %>%
   st_as_sf(coords = c("X","Y"), crs = 32633) %>%
   st_transform(crs = 25833)
-
 map <- atlasplot(color_intensity = 0.6,
                  scalebar = FALSE,
                  insert_caption = FALSE)
-
-
 map + geom_sf(data = starling_2547,
               shape = 1,
               col = "red",
@@ -91,11 +86,10 @@ Since the output is a ggplot object, you can manipulate the result as you like
 library("showtext")
 font_add_google("Martel Sans","martel sans")
 showtext_auto()
-
 map + geom_sf(data = starling_2547,shape = 18,size=2,aes(col=TAG))+
   guides(colour = guide_legend(override.aes = list(shape = 18,size=3)))+
   ggtitle("Starling captured in Dedelow")+
-  labs(caption="\nVisualisation by Marius Grabow using d6atlasplot")+
+  labs(caption="\nVisualisation by Marius Grabow using d6atlas")+
   theme(
     legend.text = element_text(size=12),
     legend.key = element_rect(fill="white"),
@@ -113,8 +107,7 @@ atlasauto() is based on atlasplot(), but takes the functionality one step furthe
 Let's consider you just received your data and want to have a quick look, how your animals move in the landscape:
 
 ```{r}
-starling_2547<-d6atlasplot::starling_2547 #this data set comes with the package
-
+starling_2547<-d6atlas::starling_2547 #this data set comes with the package
 # here, the crs is transformed to match the one of the underlying map, the data frame is transformed into a simple features object, the bounding box is extracted to plot a smaller window of interest.
 atlasauto(starling_2547) 
 ```
@@ -122,11 +115,9 @@ atlasauto(starling_2547)
 If you are interested in very detailed views, you can also plot subsets, e.g. by filtering your data set before and selecting your duration of interest. 
 ```{r}
 starling_sub <- starling_2547[400:405,]
-
 atlasauto(starling_sub, 
           scalebar = T,
           color_intensity = 0.8,
           size = 3,
           col = "blue") 
 ```
-

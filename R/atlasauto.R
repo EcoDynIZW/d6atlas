@@ -11,8 +11,8 @@
 #' @return a ggplot object with the bounding box of your data
 #' @examples
 #' \dontrun{
-#' starling_2547 <- d6atlasplot::starling_2547
-#' atlasauto(starling_2547)
+#' starling_2547 <- d6atlas::starling_2547
+#' d6atlas::atlasauto(starling_2547)
 #'  }
 #' }
 #' @seealso
