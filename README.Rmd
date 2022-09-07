@@ -13,7 +13,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# d6atlas + atlasauto
+<img src='man/figures/d6atlaslogo1.png' align="right" height="400" /></a>
+
+# d6atlas
 
 <!-- badges: start -->
 

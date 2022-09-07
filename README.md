@@ -1,5 +1,7 @@
 
-# d6atlas + atlasauto
+<img src='man/figures/d6atlaslogo1.png' align="right" height="400" /></a>
+
+# d6atlas
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -78,16 +80,17 @@ atlasplot(color_intensity = 1,
 
 Let’s assume you have recorded some animal locations or you want to plot
 another information on top of our base map. For example, let’s visualize
-a tracked bird by adding geom_sf(data = x) to the map object.
+a tracked bird by adding geom\_sf(data = x) to the map object.
 
-Here, we transform our data (starling_2547; a data set that is included
+Here, we transform our data (starling\_2547; a data set that is included
 in this package) to sf, assign the right coordinate system and plot the
 map:
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.1.3
 library(sf)
-#> Linking to GEOS 3.9.1, GDAL 3.4.3, PROJ 7.2.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1
 starling_2547 <- d6atlas::starling_2547 %>%
   st_as_sf(coords = c("X","Y"), crs = 32633) %>%
   st_transform(crs = 25833)
