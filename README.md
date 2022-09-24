@@ -50,12 +50,11 @@ further aggregated into the main categories. For further information and
 a PDF about biotop classes visit
 <https://metaver.de/trefferanzeige?docuuid=B57B9F35-AFFF-49F2-BA32-618D1A1CD412#detail_links>
 
-The map is projected in **EPSG: 25833, ETRS89 / UTM zone 33N**
+The map is projected in **EPSG: 3035, ETRS89-extended / LAEA Europe**
 
 ``` r
 atlasplot()
 #> Plotting map.
-#> Adding caption.
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
@@ -93,44 +92,49 @@ library(sf)
 #> Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1
 starling_2547 <- d6atlas::starling_2547 %>%
   st_as_sf(coords = c("X","Y"), crs = 32633) %>%
-  st_transform(crs = 25833)
+  st_transform(crs = 3035)
+
 map <- atlasplot(color_intensity = 0.6,
                  scalebar = FALSE,
                  insert_caption = FALSE)
 #> Plotting map.
 map + geom_sf(data = starling_2547,
               shape = 1,
-              col = "red",
+              aes(col = TIME),
               size = 1)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+## Plot appearance
 
 Since the output is a ggplot object, you can manipulate the result as
 you like
 
 ``` r
 library("showtext")
-#> Loading required package: sysfonts
-#> Loading required package: showtextdb
-font_add_google("Martel Sans","martel sans")
+font_add_google("Roboto Slab","roboto slab")
 showtext_auto()
-map + geom_sf(data = starling_2547,shape = 18,size=2,aes(col=TAG))+
+
+
+map + geom_sf(data = starling_2547,shape = 18,size=2,aes(col=TIME))+
   guides(colour = guide_legend(override.aes = list(shape = 18,size=3)))+
   ggtitle("Starling captured in Dedelow")+
   labs(caption="\nVisualisation by Marius Grabow using d6atlas")+
   theme(
     legend.text = element_text(size=12),
     legend.key = element_rect(fill="white"),
-    plot.title = element_text(size = 18, hjust = .5, family = "martel sans",face = "bold")
-    
-    )
+    plot.title = element_text(size = 18, hjust = .5, family = "roboto slab",
+                              colour ="grey20")
+    )+
+   ggplot2::coord_sf(xlim = c(st_bbox(starling_2547)[1]-500,st_bbox(starling_2547)[3]+500),
+                     ylim = c(st_bbox(starling_2547)[2]-500,st_bbox(starling_2547)[4]+500))
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ``` r
-ggsave("starling.pdf", width = 12, height = 9, device = cairo_pdf)
+#ggsave("starling.pdf", width = 12, height = 9, device = cairo_pdf)
 ```
 
 ## Atlasauto
@@ -149,27 +153,34 @@ look, how your animals move in the landscape:
 ``` r
 starling_2547<-d6atlas::starling_2547 #this data set comes with the package
 # here, the crs is transformed to match the one of the underlying map, the data frame is transformed into a simple features object, the bounding box is extracted to plot a smaller window of interest.
-atlasauto(starling_2547) 
+atlasauto(d6atlas::starling_2547,
+          aes_col = TIME) 
 #> Plotting map.
-#> Adding caption.
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+## Zooming into details
+
+If you are interested in very detailed views, you can also plot subsets,
+e.g. by filtering your data set. Here, we are interested in what this
+starling did on 02.06.2022 between 06:20 & 08:40.
+
+``` r
+library("lubridate")
+#> Warning: package 'lubridate' was built under R version 4.1.3
+#> 
+#> Attaching package: 'lubridate'
+#> The following objects are masked from 'package:base':
+#> 
+#>     date, intersect, setdiff, union
+atlasauto(starling_2547%>%
+            dplyr::filter(starling_2547$TIME %within% interval(
+              ymd_hm(202106020620),
+              ymd_hm(202106020840))),
+          aes_col=TIME,
+          size=2)
+#> Plotting map.
 ```
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
-
-If you are interested in very detailed views, you can also plot subsets,
-e.g. by filtering your data set before and selecting your duration of
-interest.
-
-``` r
-starling_sub <- starling_2547[400:405,]
-atlasauto(starling_sub, 
-          scalebar = T,
-          color_intensity = 0.8,
-          size = 3,
-          col = "blue") 
-#> Plotting map.
-#> Adding caption.
-#> Adding annotation scalebar.
-```
-
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />

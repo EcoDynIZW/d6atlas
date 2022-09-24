@@ -5,7 +5,7 @@
 #'                        desaturated) to 1 (fully saturated), Default: 1
 #' @param scalebar Boolean: add a scale bar, Default: FALSE
 #' @param north_arrow Boolean: add a north arrow, Default: FALSE
-#' @param insert_caption Boolean: add a caption, Default: TRUE
+#' @param insert_caption Boolean: add a caption, Default: FALSE
 #' @param legend string: Either "bottom", "top", or "none". Otherwise specify
 #'               positions via legend_x and legend_y, Default: 'bottom'
 #' @param legend_x Numeric: Horizontal position of the legend (0 – 1), Default: NULL
@@ -32,11 +32,12 @@
 #' @importFrom colorspace desaturate lighten
 #' @importFrom ggplot2 ggplot geom_sf theme_void element_blank element_rect annotate
 #' @importFrom ggspatial annotation_scale annotation_north_arrow
+#' @importFrom sf st_bbox
 #'
 atlasplot <- function(color_intensity = 1,
                       scalebar = FALSE,
                       north_arrow = FALSE,
-                      insert_caption = TRUE,
+                      insert_caption = FALSE,
                       legend = "bottom",
                       legend_x = NULL,
                       legend_y = NULL,
@@ -51,12 +52,11 @@ atlasplot <- function(color_intensity = 1,
   if (is.null(legend_x) & legend == "top") { legend_x <- .82; legend_y <- .85 }
   if (legend %in% c("none", "None")) leg <- "none" else leg <- "colourbar"
 
-  ## COLOR PALETTE -------------------------------------------------------------
-  pal <- scales::alpha(
-    grDevices::colorRampPalette(c("grey95", "grey5"))(100), color_intensity
-  )
 
-  col_water <-
+
+  ## COLORS -------------------------------------------------------------
+
+   col_water <-
     colorspace::desaturate(
       colorspace::lighten("#a9c3df", (1 - color_intensity) / 1.5),
       (1 - color_intensity) / 1.5

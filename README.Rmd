@@ -48,7 +48,8 @@ library(d6atlas)
 
 The basic template map plots a map in the ATLAS experimental area in Uckermark, Brandenburg. All vector data was derived from Geoportal Brandenburg, more precisely the current biotop mapping of 2009 provided by the Landesamt fuer Umwelt Brandenburg (LfU) in 2009. These were further aggregated into the main categories. For further information and a PDF about biotop classes visit <https://metaver.de/trefferanzeige?docuuid=B57B9F35-AFFF-49F2-BA32-618D1A1CD412#detail_links>
 
-The map is projected in **EPSG: 25833, ETRS89 / UTM zone 33N**
+The map is projected in **EPSG: 3035, ETRS89-extended / LAEA Europe**
+
 ```{r}
 atlasplot()
 ```
@@ -73,37 +74,48 @@ library(ggplot2)
 library(sf)
 starling_2547 <- d6atlas::starling_2547 %>%
   st_as_sf(coords = c("X","Y"), crs = 32633) %>%
-  st_transform(crs = 25833)
+  st_transform(crs = 3035)
+
 map <- atlasplot(color_intensity = 0.6,
                  scalebar = FALSE,
                  insert_caption = FALSE)
 map + geom_sf(data = starling_2547,
               shape = 1,
-              col = "red",
+              aes(col = TIME),
               size = 1)
 ```
 
+
+## Plot appearance
+
 Since the output is a ggplot object, you can manipulate the result as you like
-```{r}
+
+```{r message=FALSE, warning=FALSE}
 library("showtext")
-font_add_google("Martel Sans","martel sans")
+font_add_google("Roboto Slab","roboto slab")
 showtext_auto()
-map + geom_sf(data = starling_2547,shape = 18,size=2,aes(col=TAG))+
+
+
+map + geom_sf(data = starling_2547,shape = 18,size=2,aes(col=TIME))+
   guides(colour = guide_legend(override.aes = list(shape = 18,size=3)))+
   ggtitle("Starling captured in Dedelow")+
   labs(caption="\nVisualisation by Marius Grabow using d6atlas")+
   theme(
     legend.text = element_text(size=12),
     legend.key = element_rect(fill="white"),
-    plot.title = element_text(size = 18, hjust = .5, family = "martel sans",face = "bold")
-    
-    )
-```
-```{r}
-ggsave("starling.pdf", width = 12, height = 9, device = cairo_pdf)
+    plot.title = element_text(size = 18, hjust = .5, family = "roboto slab",
+                              colour ="grey20")
+    )+
+   ggplot2::coord_sf(xlim = c(st_bbox(starling_2547)[1]-500,st_bbox(starling_2547)[3]+500),
+                     ylim = c(st_bbox(starling_2547)[2]-500,st_bbox(starling_2547)[4]+500))
+
+
+#ggsave("starling.pdf", width = 12, height = 9, device = cairo_pdf)
+
 ```
 
 ## Atlasauto
+
 atlasauto() is based on atlasplot(), but takes the functionality one step further. Here, we aim to provide users for a fast and easy way to plot your data after receiving or downloading it - without considering issues that come with spatial data (coordinate systems, etc). atlasauto uses your dataframe as an input, defines the bounding box you need to display your data without showing too much "empty" space that is out of your scope.
 
 Let's consider you just received your data and want to have a quick look, how your animals move in the landscape:
@@ -111,15 +123,22 @@ Let's consider you just received your data and want to have a quick look, how yo
 ```{r}
 starling_2547<-d6atlas::starling_2547 #this data set comes with the package
 # here, the crs is transformed to match the one of the underlying map, the data frame is transformed into a simple features object, the bounding box is extracted to plot a smaller window of interest.
-atlasauto(starling_2547) 
+atlasauto(d6atlas::starling_2547,
+          aes_col = TIME) 
 ```
 
-If you are interested in very detailed views, you can also plot subsets, e.g. by filtering your data set before and selecting your duration of interest. 
+
+## Zooming into details
+
+If you are interested in very detailed views, you can also plot subsets, e.g. by filtering your data set. Here, we are interested in what this starling did on 02.06.2022 between 06:20 & 08:40.
+
 ```{r}
-starling_sub <- starling_2547[400:405,]
-atlasauto(starling_sub, 
-          scalebar = T,
-          color_intensity = 0.8,
-          size = 3,
-          col = "blue") 
+library("lubridate")
+
+atlasauto(starling_2547%>%
+            dplyr::filter(starling_2547$TIME %within% interval(
+              ymd_hm(202106020620),
+              ymd_hm(202106020840))),
+          aes_col=TIME,
+          size=2)
 ```

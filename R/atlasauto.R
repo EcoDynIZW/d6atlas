@@ -1,6 +1,7 @@
 #' @title Transform your data & plot with suitable bounding box
 #' @description atlasauto aims to provide ATLAS users in Dedelow a fast solution to plot your data after receiving / downloading it. The function automatically transforms X and Y into a sf-object, transforms the coordinates into ETRS89 / UTM zone 33N and crops the underlying map for your needs.
 #' @param data your data frame, can be filtered or unfiltered
+#' @param aes_col column that defines your aesthetics in ggplot (aes)
 #' @param size size of the dots, Default: 1
 #' @param color color of the dots, Default: "red"
 #' @param scalebar Boolean: add a scale bar, Default: FALSE
@@ -8,6 +9,7 @@
 #' @param color_intensity Numeric: control the desaturation of
 #'                        the color intensity, ranging from 0 (fully
 #'                        desaturated) to 1 (fully saturated), Default: 1
+#' @param ... other aesthetics applied in ggplot
 #' @return a ggplot object with the bounding box of your data
 #' @examples
 #' \dontrun{
@@ -21,23 +23,30 @@
 #' @rdname atlasauto
 #' @export
 #' @importFrom sf st_as_sf st_transform st_bbox
-#' @importFrom ggplot2 geom_sf
+#' @importFrom ggplot2 geom_sf aes
 #' @importFrom ggspatial annotation_scale annotation_north_arrow
 
 atlasauto <- function(data,
+                      aes_col,
                       size=1,
-                      color="red",
                       scalebar=FALSE,
                       north_arrow=FALSE,
-                      color_intensity=1) {
+                      color_intensity=1,
+                      ...) {
+
+
+   # In case no aes arguments are used
+
+   if (missing(aes_col)) aes_col <- NULL
+
 
   #transform crs
   data <- sf::st_as_sf(data,coords = c("X","Y"), crs = 32633)
-  data <- sf::st_transform(data,crs = 25833)
+  data <- sf::st_transform(data,crs = 3035)
   bbox <- sf::st_bbox(data)
   #plot
  g <- atlasplot(color_intensity=color_intensity)+
-   ggplot2::geom_sf(data = data, color = color, size = size)+
+   ggplot2::geom_sf(data = data, aes(col={{aes_col}},...), size = size)+
    ggplot2::coord_sf(xlim = c(bbox[1],bbox[3]),
                      ylim = c(bbox[2],bbox[4]))
  ## annotation scale.........................................................
