@@ -6,19 +6,20 @@
 \usage{
 atlasauto(
   data,
+  aes_col,
   size = 1,
-  color = "red",
   scalebar = FALSE,
   north_arrow = FALSE,
-  color_intensity = 1
+  color_intensity = 1,
+  ...
 )
 }
 \arguments{
 \item{data}{your data frame, can be filtered or unfiltered}
 
-\item{size}{size of the dots, Default: 1}
+\item{aes_col}{column that defines your aesthetics in ggplot (aes)}
 
-\item{color}{color of the dots, Default: "red"}
+\item{size}{size of the dots, Default: 1}
 
 \item{scalebar}{Boolean: add a scale bar, Default: FALSE}
 
@@ -27,12 +28,20 @@ atlasauto(
 \item{color_intensity}{Numeric: control the desaturation of
 the color intensity, ranging from 0 (fully
 desaturated) to 1 (fully saturated), Default: 1}
+
+\item{...}{other aesthetics applied in ggplot}
 }
 \value{
 a ggplot object with the bounding box of your data
 }
 \description{
 atlasauto aims to provide ATLAS users in Dedelow a fast solution to plot your data after receiving / downloading it. The function automatically transforms X and Y into a sf-object, transforms the coordinates into ETRS89 / UTM zone 33N and crops the underlying map for your needs.
+}
+\examples{
+\dontrun{
+starling_2547 <- d6atlas::starling_2547
+d6atlas::atlasauto(starling_2547)
+ }
 }
 \seealso{
 \code{\link[sf]{st_as_sf}},\code{\link[sf]{st_transform}}
