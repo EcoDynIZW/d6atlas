@@ -3,3 +3,10 @@
 .Rdata
 .httr-oauth
 .DS_Store
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
+
+/data-raw/*
+/inst/*

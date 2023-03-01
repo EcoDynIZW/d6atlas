@@ -8,7 +8,7 @@ atlasplot(
   color_intensity = 1,
   scalebar = FALSE,
   north_arrow = FALSE,
-  insert_caption = TRUE,
+  insert_caption = FALSE,
   legend = "bottom",
   legend_x = NULL,
   legend_y = NULL,
@@ -24,7 +24,7 @@ desaturated) to 1 (fully saturated), Default: 1}
 
 \item{north_arrow}{Boolean: add a north arrow, Default: FALSE}
 
-\item{insert_caption}{Boolean: add a caption, Default: TRUE}
+\item{insert_caption}{Boolean: add a caption, Default: FALSE}
 
 \item{legend}{string: Either "bottom", "top", or "none". Otherwise specify
 positions via legend_x and legend_y, Default: 'bottom'}
@@ -40,6 +40,12 @@ A ggplot object containing a template map for the ATLAS-region
 }
 \description{
 plots a template map for the experimental area of the ATLAS system in the Uckermark, Brandenburg
+}
+\examples{
+\dontrun{
+d6atlas::atlasplot()
+d6atlas::atlasplot(north_arrow = TRUE, scalebar = TRUE)
+ }
 }
 \seealso{
 \code{\link[dplyr]{between}}

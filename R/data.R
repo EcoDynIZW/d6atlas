@@ -180,3 +180,60 @@
 #'}
 #' @details DETAILS
 "starling_2547"
+
+
+#' @title spatRatser extent and crs
+#' @description list with extent object and crs string
+#' @format A list with extent object and crs string
+#' \describe{
+#'   \item{\code{extent}}{terra extent object}
+#'   \item{\code{crs}}{character crs string}
+#'}
+#' @details DETAILS
+"ras_list"
+
+#' @title landuse
+#' @description a vector with spatRatser values
+#' @format  values of landuse categories
+#' \describe{
+#'   \item{\code{landuse}}{vector with landuse categories}
+#'}
+#' @details DETAILS
+"landuse"
+
+#' @title dist_human_settlements
+#' @description a vector with spatRatser values
+#' @format  values distance to settlements
+#' \describe{
+#'   \item{\code{dist_human_settlements}}{vector with distance values in m}
+#'}
+#' @details DETAILS
+"dist_human_settlements"
+
+#' @title dist_kettleholes
+#' @description vector with spatRatser values
+#' @format  values distance to kettleholes
+#' \describe{
+#'   \item{\code{dist_kettleholes}}{vector with distance values in m}
+#'}
+#' @details DETAILS
+"dist_kettleholes"
+
+#' @title dist_rivers
+#' @description vector with spatRatser values
+#' @format values distance to rivers
+#' \describe{
+#'   \item{\code{dist_rivers}}{vector with distance values in m}
+#'}
+#' @details DETAILS
+"dist_rivers"
+
+#' @title dist_streets
+#' @description vector with spatRatser values
+#' @format values distance to streets
+#' \describe{
+#'   \item{\code{dist_streets}}{vector with distance values in m}
+#'}
+#' @details DETAILS
+"dist_streets"
+

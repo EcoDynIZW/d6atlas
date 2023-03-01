@@ -17,7 +17,6 @@
 #' d6atlas::atlasplot()
 #' d6atlas::atlasplot(north_arrow = TRUE, scalebar = TRUE)
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[dplyr]{between}}
 #'  \code{\link[scales]{alpha}}

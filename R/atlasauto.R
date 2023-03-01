@@ -3,7 +3,6 @@
 #' @param data your data frame, can be filtered or unfiltered
 #' @param aes_col column that defines your aesthetics in ggplot (aes)
 #' @param size size of the dots, Default: 1
-#' @param color color of the dots, Default: "red"
 #' @param scalebar Boolean: add a scale bar, Default: FALSE
 #' @param north_arrow Boolean: add a north arrow, Default: FALSE
 #' @param color_intensity Numeric: control the desaturation of
@@ -16,7 +15,6 @@
 #' starling_2547 <- d6atlas::starling_2547
 #' d6atlas::atlasauto(starling_2547)
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[sf]{st_as_sf}},\code{\link[sf]{st_transform}}
 #'  \code{\link[ggplot2]{CoordSf}}
