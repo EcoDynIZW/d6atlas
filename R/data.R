@@ -245,3 +245,17 @@
 #'}
 #' @details DETAILS
 "dist_water"
+
+#' @title landuse_reclass_table
+#' @description dataframe with biotope types with original and english names for classes
+#' @format dataframe with five columns
+#' \describe{
+#'   \item{\code{biotoptype}}{character biotope main type}
+#'   \item{\code{Name_Klasse}}{character biotope main text (german)}
+#'   \item{\code{BIOTYP8}}{character biotope sub type}
+#'   \item{\code{Name_8st}}{character biotope sub text (german)}
+#'   \item{\code{name_class_eng}}{character biotope text (german)}
+
+#'}
+#' @details DETAILS
+"landuse_reclass_table"

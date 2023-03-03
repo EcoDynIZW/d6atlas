@@ -1,72 +1,44 @@
-#' @title get atlas SpatRaster stack
-#' @description get SpatRaster stack with environmental layers (landuse, distance to settlements, distance to kettleholes, distance to rivers, distance to streets)
-#' @param resolution Numeric: resolution 1 = 5m, 2 = 10m, 4 = 20m
-#' @return a SpatRatser stack
+#' @title get a dataframe with the extracted values from the atlas_stack
+#' @description add extracted values from atlas_stack (landuse, distance to settlements, distance to kettleholes, distance to rivers, distance to streets, distance to waterbodies) to the starling_2547 dataframe or to another one
+#' @param sf_point a sf point with extent of atlas_stack.
+#' @return a af object with extracted values
 #' @export
 #' @examples
 #' \dontrun{
-#' d6atlas::atlas_stack(resolution = 1)
-#' d6atlas::atlas_stack(resolution = 4)
+#' d6atlas::extract_stack(sf_point = sf_point)
 #'  }
 
 
-extract_stack <- function(df = d6atlas::starling_2547){
+extract_stack <- function(sf_point){
+
+  stopifnot("sf_point must be an sf point object"= all(sf::st_geometry_type(sf_point) %in% c("POINT", "MULTIPOINT")))
+
   atlas_stack <- d6atlas::atlas_stack()
+  crs_sf_point <- sf::st_crs(sf_point)
 
-  df_sf <- sf::st_as_sf(x = df,
-                    coords = c("X", "Y"),
-                    remove = FALSE,
-                    crs = sf::st_crs(32633)) %>%
-    sf::st_transform(3035)
+  message("crs was changed to EPSG 3035 for extracting")
 
-  df_ext <- dplyr::bind_cols(df, terra::extract(atlas_stack, df_sf, ID = FALSE))
-  return(df_ext)
+  sf_point <- sf_point %>%
+    sf::st_transform(sf::st_crs(atlas_stack))
+
+  sf_point <- dplyr::bind_cols(sf_point, terra::extract(atlas_stack, sf_point, ID = FALSE))
+
+  sf_point <- sf_point %>%
+    sf::st_transform(crs_sf_point)
+
+  sf_point <- sf_point %>%
+    dplyr::left_join(y = landuse_reclass_table %>%
+                       dplyr::rename("landuse" = BIOTYP8) %>%
+                       mutate(landuse = as.numeric(landuse)), by = "landuse")
+
+
+  message("crs was changed back to given projection")
+
+  return(sf_point)
+
 }
 
 
 
 
 
-atlas_stack <- function(resolution = 1) {
-  values_list <- list(landuse = d6atlas::landuse,
-                      dist_human_settlements = d6atlas::dist_human_settlements,
-                      dist_kettleholes = d6atlas::dist_kettleholes,
-                      dist_rivers = d6atlas::dist_rivers,
-                      dist_streets  = d6atlas::dist_streets)
-
-  if (resolution %in% c(1,2,4)) {
-    if (resolution == 1) {
-      do.call(c,
-              lapply(1:length(values_list), function(x) {
-                terra::rast(
-                  crs = d6atlas::ras_list$crs,
-                  extent = d6atlas::ras_list$extent,
-                  resolution = 5,
-                  vals = values_list[[x]],
-                  names = names(values_list)[x]
-                )
-              }))
-    } else{
-      c(
-        terra::rast(
-          crs = d6atlas::ras_list$crs,
-          extent = d6atlas::ras_list$extent,
-          resolution = 5,
-          vals = values_list[[1]],
-          names = names(values_list)[1]
-        ) %>% terra::aggregate(fact = resolution, fun = "modal"),
-        do.call(c,
-                lapply(2:length(values_list), function(x) {
-                  terra::rast(
-                    crs = d6atlas::ras_list$crs,
-                    extent = d6atlas::ras_list$extent,
-                    resolution = 5,
-                    vals = values_list[[x]],
-                    names = names(values_list)[x]
-                  ) %>% terra::aggregate(fact = resolution, fun = "mean")
-                }))
-      )
-    }
-  } else
-    (print("wrong resolution"))
-}
