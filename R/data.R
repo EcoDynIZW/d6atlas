@@ -237,3 +237,11 @@
 #' @details DETAILS
 "dist_streets"
 
+#' @title dist_water
+#' @description vector with spatRatser values
+#' @format values distance to waterbodies
+#' \describe{
+#'   \item{\code{dist_water}}{vector with distance values in m}
+#'}
+#' @details DETAILS
+"dist_water"

@@ -15,7 +15,8 @@ atlas_stack <- function(resolution = 1) {
                       dist_human_settlements = d6atlas::dist_human_settlements,
                       dist_kettleholes = d6atlas::dist_kettleholes,
                       dist_rivers = d6atlas::dist_rivers,
-                      dist_streets  = d6atlas::dist_streets)
+                      dist_streets  = d6atlas::dist_streets,
+                      dist_water  = d6atlas::dist_water)
 
   if (resolution %in% c(1,2,4)) {
     if (resolution == 1) {
