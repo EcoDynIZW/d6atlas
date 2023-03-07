@@ -70,13 +70,13 @@
 #
 # landuse_reclass_table <- readRDS("./data-raw/biotop_classes_reclass_table.rds")
 #
-# # saveRDS(ras_list, "./data-raw/ras_list.rds")
-# # saveRDS(landuse, "./data-raw/landuse.rds")
-# # saveRDS(dist_human_settlements, "./data-raw/dist_human_settlements.rds")
-# # saveRDS(dist_kettleholes, "./data-raw/dist_kettleholes.rds")
-# # saveRDS(dist_rivers, "./data-raw/dist_rivers.rds")
-# # saveRDS(dist_streets, "./data-raw/dist_streets.rds")
-# # saveRDS(landuse_reclass_table, "./data-raw/landuse_reclass_table.rds")
+# saveRDS(ras_list, "./data-raw/ras_list.rds")
+# saveRDS(landuse, "./data-raw/landuse.rds")
+# saveRDS(dist_human_settlements, "./data-raw/dist_human_settlements.rds")
+# saveRDS(dist_kettleholes, "./data-raw/dist_kettleholes.rds")
+# saveRDS(dist_rivers, "./data-raw/dist_rivers.rds")
+# saveRDS(dist_streets, "./data-raw/dist_streets.rds")
+# saveRDS(landuse_reclass_table, "./data-raw/landuse_reclass_table.rds")
 #
 # usethis::use_data(
 #   water_01,
