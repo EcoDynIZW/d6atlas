@@ -1,3 +1,4 @@
+#
 # library(dplyr)
 #
 # water_01 <- sf::read_sf("data-raw/01_water_line.shp")
@@ -57,42 +58,45 @@
 # landuse <-
 #   terra::values(lu_ras)[, 1]
 # dist_human_settlements <-
-#   terra::values(dist_hs_ras)[, 1] %>% round(digits = 0)
+#   terra::values(dist_hs_ras)[, 1] %>% round(digits = 0) %>% as.integer()
 # dist_kettleholes <-
-#   terra::values(dist_kh_ras)[, 1] %>% round(digits = 0)
+#   terra::values(dist_kh_ras)[, 1] %>% round(digits = 0) %>% as.integer()
 # dist_rivers <-
-#   terra::values(dist_r_ras)[, 1] %>% round(digits = 0)
+#   terra::values(dist_r_ras)[, 1] %>% round(digits = 0) %>% as.integer()
 # dist_streets <-
-#   terra::values(dist_s_ras)[, 1] %>% round(digits = 0)
+#   terra::values(dist_s_ras)[, 1] %>% round(digits = 0) %>% as.integer()
 # dist_water <-
-#   terra::values(dist_w_ras)[, 1] %>% round(digits = 0)
+#   terra::values(dist_w_ras)[, 1] %>% round(digits = 0) %>% as.integer()
 #
-# #saveRDS(ras_list, "./data-raw/ras_list.rds")
-# #saveRDS(landuse, "./data-raw/landuse.rds")
-# #saveRDS(dist_human_settlements, "./data-raw/dist_human_settlements.rds")
-# #saveRDS(dist_kettleholes, "./data-raw/dist_kettleholes.rds")
-# #saveRDS(dist_rivers, "./data-raw/dist_rivers.rds")
-# #saveRDS(dist_streets, "./data-raw/dist_streets.rds")
+# landuse_reclass_table <- readRDS("./data-raw/biotop_classes_reclass_table.rds")
 #
-# # usethis::use_data(
-# #   water_01,
-# #   water_02,
-# #   ruderal_03,
-# #   swamp_04,
-# #   grassland_05,
-# #   bushland_07,
-# #   forest_08,
-# #   agriculture_09,
-# #   garden_graveyard_10,
-# #   built_up_12,
-# #   ras_list,
-# #   landuse,
-# #   dist_human_settlements,
-# #   dist_kettleholes,
-# #   dist_rivers,
-# #   dist_streets,
-# #   dist_water,
-# #   starling_2547,
-# #   overwrite = TRUE
-# # )
+# # saveRDS(ras_list, "./data-raw/ras_list.rds")
+# # saveRDS(landuse, "./data-raw/landuse.rds")
+# # saveRDS(dist_human_settlements, "./data-raw/dist_human_settlements.rds")
+# # saveRDS(dist_kettleholes, "./data-raw/dist_kettleholes.rds")
+# # saveRDS(dist_rivers, "./data-raw/dist_rivers.rds")
+# # saveRDS(dist_streets, "./data-raw/dist_streets.rds")
+# # saveRDS(landuse_reclass_table, "./data-raw/landuse_reclass_table.rds")
 #
+# usethis::use_data(
+#   water_01,
+#   water_02,
+#   ruderal_03,
+#   swamp_04,
+#   grassland_05,
+#   bushland_07,
+#   forest_08,
+#   agriculture_09,
+#   garden_graveyard_10,
+#   built_up_12,
+#   ras_list,
+#   landuse,
+#   dist_human_settlements,
+#   dist_kettleholes,
+#   dist_rivers,
+#   dist_streets,
+#   dist_water,
+#   starling_2547,
+#   landuse_reclass_table,
+#   overwrite = TRUE
+# )
