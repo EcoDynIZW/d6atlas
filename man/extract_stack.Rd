@@ -18,5 +18,11 @@ add extracted values from atlas_stack (landuse, distance to settlements, distanc
 \examples{
 \dontrun{
 d6atlas::extract_stack(sf_point = sf_point)
+
+extract_stack(sf::st_as_sf(
+  d6atlas::starling_2547,
+  coords = c("X", "Y"),
+  crs = sf::st_crs(32633)
+))
  }
 }
