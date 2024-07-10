@@ -26,7 +26,7 @@ You can install the development version of d6atlas from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mariusgrabow/d6atlas")
+devtools::install_github("EcoDynIZW/d6atlas")
 ```
 
 (Note: If you are asked if you want to update other packages either
