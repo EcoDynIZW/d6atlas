@@ -11,7 +11,7 @@
 
 stations_data <- function(year = NULL){
 
-  data <- d6atlas::stations()
+  data <- d6atlas::stations
 
   if(is.null(year) == FALSE){
     data <- sf::st_as_sf(x = tidyr::drop_na(data, paste0("x_", year)),
