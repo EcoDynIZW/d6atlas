@@ -5,11 +5,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' d6atlas::stations(year = NULL)
+#' d6atlas::stations_data(year = NULL)
 #'  }
 
 
-stations <- function(year = NULL){
+stations_data <- function(year = NULL){
 
   data <- d6atlas::stations()
 
