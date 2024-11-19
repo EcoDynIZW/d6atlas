@@ -49,7 +49,7 @@ A data frame with 1729 rows and 36 variables:
 starling_2547
 }
 \description{
-This data set contains information about one starlign tracked one day in 2021
+This data set contains information about one starling tracked one day in 2021
 }
 \details{
 DETAILS

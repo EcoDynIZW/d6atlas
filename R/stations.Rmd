@@ -1,0 +1,110 @@
+---
+title: "Coordinates Atlas Antennas" 
+
+author:
+    - name: "Moritz Wenzler-Meya"
+      url: 
+      affiliation: Leibniz Institute for Zoo and Wildlife Research
+      affiliation_url: https://izw-berlin.de/en/
+      orcid_id: 
+    - name: ""
+      url: 
+      affiliation: Leibniz Institute for Zoo and Wildlife Research
+      affiliation_url: https://izw-berlin.de/en/
+date: "`r Sys.Date()`"
+output: 
+    distill::distill_article:
+        highlight: kate
+        code_folding: false  
+        toc: true            
+        toc_depth: 2         
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, 
+                      dev = "ragg_png", fig.width = 9, fig.height = 6, dpi = 600, retina = 1)
+Sys.setlocale("LC_TIME", "C")
+```
+
+# Setup
+
+```{r packages}
+library(sf)
+```
+
+
+# Data
+
+```{r data}
+stations <- data.frame(
+  Station_id = c("atlas-biomove-1", "atlas-biomove-2", "atlas-biomove-3", "atlas-biomove-4", "atlas-biomove-5", 
+                 "atlas-biomove-6", "atlas-biomove-7", "atlas-biomove-8", "atlas-biomove-9", "atlas-biomove-10",
+                 "atlas-biomove-11", "atlas-biomove-12", "atlas-biomove-13", "atlas-biomove-14", "Beacon-Rabe",
+                 "Beacon-Jungfernberg"),
+  x_2019 = c(NA, 418608, 417511, 419225, 416782, 418162 , 416605, 414074, 420508, 419227, NA, 
+             NA, NA, NA, NA,418316),
+  y_2019 = c(NA, 5910613, 5913291, 5915169, 5914786, 5918719, 5916724, 5912483, 5913595, 5915169, NA, 
+             NA, NA, NA, NA, 5916544),
+  z_2019 = c(NA, 105, 72, 71, 77, 64, 73, 81, 47, 70, NA, 
+             NA, NA, NA, NA,62),
+  x_2020 = c(418016, 419643, 417516, 414073, 416803, 416600, 419178, 419642, 418016, 418161, NA, 
+             NA, NA, NA, 417029,418315),
+  y_2020 = c(5922279, 5913593, 5913288, 5912504, 5914787, 5916729, 5915086, 5912684, 5922279, 5918716, NA, 
+             NA, NA, NA, 5914124, 5916546),
+  z_2020 = c(95, 52, 71, 84, 80, 79, 71, 70, 95, 62, NA, 
+             NA, NA, NA, 73,62),
+  x_2021 = c(416049, 420509, 417531, 414075, 416804, 416601, 419177, 419645, 414075, 418160, NA, 
+             NA, NA, NA,418303,415814),
+  y_2021 = c(5914001, 5913594, 5913296, 5912503, 5914796, 5916728, 5915086, 5912686, 5912503, 5918728, NA,
+             NA, NA, NA, 5916525, 5914478),
+  z_2021 = c(89, 46, 71, 83, 80, 76, 69, 65, 83, 64, NA, 
+             NA, NA, NA,76,92),
+  x_2022 = c(420510, 419644, 417530, 416047, 416807, 416600, 415328, 417504, 418164, 419176, 420795, 
+             NA, NA, NA,415814,418303),
+  y_2022 = c(5913596, 5912684, 5913294, 5914002, 5914797, 5916728, 5916857,5917509, 5918731, 5915087, 5913587, 
+             NA, NA, NA, 5914478, 5916523),
+  z_2022 = c(51, 72, 72, 89, 82, 77, 85, 75, 63, 71, 56, 
+             NA, NA, NA,92,76),
+  x_2023 = c(420510.5, 419645.4, 417529.5, 416047, 416806.9, 416600.8, 415318.5, 417508.1, 418167.4, 419179.0, 419324.5,
+             419324.5, 419324.5, 420794.9,418304,415813),
+  y_2023 = c(5913592, 5912687, 5913294, 5914002, 5914796, 5916726, 5916855, 5917511, 5918733, 5915086, 5913466,
+             5913466, 5913466, 5913589, 5916523, 5914478),
+  z_2023 = c(51, 64, 73, 89, 81, 74, 83, 71, 66, 70, 56,
+             56, 56, 55,76,92),
+  x_2024 = c(420507.9, 419647.8, NA, 416047, 416768.6, 416596.5, 415327.9, 417506.1, 418167.0, 419178.4, 419758.7,
+             418161, 418615.4, 417532.05,418302.89,415810.46),
+  y_2024 = c(5913595, 5912681, NA, 5914002, 5914796.7, 5916725, 5916855, 5917511, 5918729, 5915085, 5913428,
+             5918716, 5910621, 5913294.09, 5916527.51, 5914474.9),
+  z_2024 = c(51, 67, NA, 89, 81, 75, 83, 71, 66, 71, 55,
+             62, 109, 76,76,92)
+)
+
+data_sf <- st_as_sf(x = stations |> tidyr::drop_na("x_2023"),
+                    coords = c("x_2023", "y_2023"),
+                    crs = 25833,
+                    sf_column_name = "geometry",
+                    remove = FALSE)
+
+mapview::mapview(data_sf)
+
+write.csv(stations, here::here("data-raw", "stations.csv"))
+
+usethis::use_data(stations)
+```
+
+
+
+
+
+***
+
+<details><summary>Session Info</summary>
+
+```{r sessionInfo}
+## DO NOT REMOVE!
+Sys.time()
+#git2r::repository() ## uncomment if you are using GitHub
+sessionInfo()
+```
+
+</details>

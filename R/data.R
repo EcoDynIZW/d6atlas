@@ -138,7 +138,7 @@
 "built_up_12"
 
 #' @title Starling tracked 2021
-#' @description This data set contains information about one starlign tracked one day in 2021
+#' @description This data set contains information about one starling tracked one day in 2021
 #' @format A data frame with 1729 rows and 36 variables:
 #' \describe{
 #'   \item{\code{...1}}{double COLUMN_DESCRIPTION}
@@ -258,3 +258,31 @@
 #'}
 #' @details DETAILS
 "landuse_reclass_table"
+
+#' @title stations
+#' @description table with station locations from 2019 to 2024
+#' @format a dataframe with 16 rows and 19 columns
+#' \describe{
+#'   \item{\code{Station_id}}{character Station id}
+#'   \item{\code{x_2019}}{numeric x coordinate}
+#'   \item{\code{y_2019}}{numeric y coordinate}
+#'   \item{\code{z_2019}}{numerix z coordinate}
+#'   \item{\code{x_2020}}{numeric x coordinate}
+#'   \item{\code{y_2020}}{numeric y coordinate}
+#'   \item{\code{z_2020}}{numerix z coordinate}
+#'   \item{\code{x_2021}}{numeric x coordinate}
+#'   \item{\code{y_2021}}{numeric y coordinate}
+#'   \item{\code{z_2021}}{numerix z coordinate}
+#'   \item{\code{x_2022}}{numeric x coordinate}
+#'   \item{\code{y_2022}}{numeric y coordinate}
+#'   \item{\code{z_2022}}{numerix z coordinate}
+#'   \item{\code{x_2023}}{numeric x coordinate}
+#'   \item{\code{y_2023}}{numeric y coordinate}
+#'   \item{\code{z_2023}}{numerix z coordinate}
+#'   \item{\code{x_2024}}{numeric x coordinate}
+#'   \item{\code{y_2024}}{numeric y coordinate}
+#'   \item{\code{z_2024}}{numerix z coordinate}
+#'}
+#' @details DETAILS
+"stations"
+
